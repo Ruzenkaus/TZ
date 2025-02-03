@@ -53,7 +53,11 @@ namespace TestTasks.InternationalTradeTask
         }
         public double GetExportTariff(string commodityName)
         {
-            throw new NotImplementedException();
+            var commodity = FindCommodityGroup(commodityName);
+            if (commodity == null)
+                throw new ArgumentException($"Commodity '{commodityName}' not found.");
+
+            return GetEffectiveExportTariff(commodity);
         }
         private double GetEffectiveExportTariff(ICommodityGroup commodity)
         {
